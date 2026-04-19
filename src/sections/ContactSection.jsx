@@ -13,9 +13,9 @@ const ContactSection = () => {
   const sectionRef = useRef(null)
 
   useEffect(() => {
-    // Initialize EmailJS v4 with public key
+    // Initialize EmailJS v4 with public key from environment
     emailjs.init({
-      publicKey: "T6qIIbwz2Gr38PBxy",
+      publicKey: import.meta.env.VITE_EMAILJS_USER_ID,
     });
 
     const observer = new IntersectionObserver(
@@ -52,7 +52,7 @@ const ContactSection = () => {
       console.log('EmailJS object:', emailjs)
       
       // Test if EmailJS is properly initialized
-      const testResult = await emailjs.send('service_2j6o4f5', 'template_i9zgzrt', {
+      const testResult = await emailjs.send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, {
         from_name: 'Test User',
         from_email: 'test@example.com',
         message: 'This is a test message'
@@ -76,9 +76,9 @@ const ContactSection = () => {
     setIsSubmitting(true)
 
     try {
-      // EmailJS configuration
-      const serviceID = 'service_2j6o4f5'
-      const templateID = 'template_i9zgzrt'
+      // EmailJS configuration from environment variables
+      const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+      const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
 
       console.log('📧 Attempting to send email...')
       console.log('Service ID:', serviceID)
@@ -113,7 +113,7 @@ const ContactSection = () => {
     {
       icon: '📧',
       label: 'EMAIL',
-      content: 'your-actual-email@gmail.com' // Replace with your real email
+      content: import.meta.env.VITE_EMAILJS_TO_EMAIL || 'your-email@example.com'
     },
     {
       icon: '📍',
@@ -156,7 +156,7 @@ const ContactSection = () => {
           <polyline points="22,6 12,13 2,6"/>
         </svg>
       ),
-      href: 'mailto:your-actual-email@gmail.com'
+      href: `mailto:${import.meta.env.VITE_EMAILJS_TO_EMAIL || 'your-email@example.com'}`
     },
     {
       name: 'Twitter/X',
