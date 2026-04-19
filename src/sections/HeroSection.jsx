@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import profileImage from '../assets/profile.png'
 
 const HeroSection = () => {
   const heroRef = useRef(null)
@@ -29,6 +30,7 @@ const HeroSection = () => {
     <section
       ref={heroRef}
       id="hero"
+      className="hero-grid"
       style={{
         minHeight: '100vh',
         display: 'grid',
@@ -37,15 +39,7 @@ const HeroSection = () => {
         gap: '60px',
         paddingTop: '120px',
         overflow: 'hidden',
-        position: 'relative',
-        '@media (max-width: 768px)': {
-          gridTemplateColumns: '1fr',
-          textAlign: 'center',
-          gap: '36px',
-          paddingTop: '90px',
-          paddingBottom: '80px',
-          minHeight: 'auto'
-        }
+        position: 'relative'
       }}
     >
       {/* Animated background grid */}
@@ -126,7 +120,7 @@ const HeroSection = () => {
             transition: 'opacity .8s .35s both, transform .8s .35s both'
           }}
         >
-          Alex<br /><span className="green" style={{ color: 'var(--green)' }}>Rahman</span>
+          Shihabul Abedin<br /><span className="green" style={{ color: 'var(--green)' }}>Shimul</span>
         </h1>
 
         <p
@@ -142,7 +136,7 @@ const HeroSection = () => {
             transition: 'opacity .8s .5s both, transform .8s .5s both'
           }}
         >
-          // Backend Developer | AI Automation Engineer
+          // Backend Developer | AI Automation
         </p>
 
         <p
@@ -248,26 +242,21 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="hero-right" style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center',
-        position: 'relative', 
-        zIndex: 2,
-        '@media (max-width: 768px)': {
-          order: -1
-        }
-      }}>
+      <div
+          className="hero-photo hero-animate"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative', 
+            zIndex: 2
+          }}>
         <div
-          className="photo-wrapper"
+          className="photo-wrapper hero-photo-frame"
           style={{
             position: 'relative',
             width: 'clamp(180px, 28vw, 360px)',
-            height: 'clamp(180px, 28vw, 360px)',
-            '@media (max-width: 768px)': {
-              width: 'clamp(180px, 50vw, 260px)',
-              height: 'clamp(180px, 50vw, 260px)'
-            }
+            height: 'clamp(180px, 28vw, 360px)'
           }}
         >
           <div
@@ -307,7 +296,7 @@ const HeroSection = () => {
           />
           
           <div
-            className="photo-frame"
+            className="photo-frame hero-photo-emoji"
             style={{
               width: '100%',
               height: '100%',
@@ -319,18 +308,24 @@ const HeroSection = () => {
               alignItems: 'center',
               justifyContent: 'center',
               position: 'relative',
-              fontSize: '7rem',
-              '@media (max-width: 768px)': {
-                fontSize: '5rem'
-              }
+              fontSize: '7rem'
             }}
           >
-            🧑‍💻
+            <img 
+  src={profileImage} 
+  alt="Shihabul Abedin Shimul - Backend Developer"
+  style={{
+    width: '100%',
+    height: '100%',
+    borderRadius: '50%',
+    objectFit: 'cover'
+  }}
+/>
           </div>
 
           {/* Floating tech badges */}
           <div
-            className="tech-badge"
+            className="tech-badge tech-badge-1"
             style={{
               position: 'absolute',
               background: 'rgba(10,10,10,.9)',
@@ -338,7 +333,7 @@ const HeroSection = () => {
               borderRadius: '10px',
               padding: '8px 14px',
               fontFamily: 'var(--font-mono)',
-              fontSize: '.7rem',
+              fontSize: '.72rem',
               color: 'var(--green)',
               letterSpacing: '.05em',
               backdropFilter: 'blur(10px)',
@@ -346,20 +341,14 @@ const HeroSection = () => {
               whiteSpace: 'nowrap',
               top: '8%',
               right: '-18%',
-              animationDelay: '0s',
-              '@media (max-width: 768px)': {
-                fontSize: '.62rem',
-                padding: '6px 10px',
-                top: '0%',
-                right: '-5%'
-              }
+              animationDelay: '0s'
             }}
           >
             🐍 Python
           </div>
           
           <div
-            className="tech-badge"
+            className="tech-badge tech-badge-2"
             style={{
               position: 'absolute',
               background: 'rgba(10,10,10,.9)',
@@ -388,7 +377,7 @@ const HeroSection = () => {
           </div>
           
           <div
-            className="tech-badge"
+            className="tech-badge tech-badge-3"
             style={{
               position: 'absolute',
               background: 'rgba(10,10,10,.9)',
@@ -404,17 +393,14 @@ const HeroSection = () => {
               whiteSpace: 'nowrap',
               top: '55%',
               right: '-22%',
-              animationDelay: '1.6s',
-              '@media (max-width: 768px)': {
-                display: 'none'
-              }
+              animationDelay: '1.6s'
             }}
           >
             🤖 LangChain
           </div>
           
           <div
-            className="tech-badge"
+            className="tech-badge tech-badge-4"
             style={{
               position: 'absolute',
               background: 'rgba(10,10,10,.9)',
@@ -430,10 +416,7 @@ const HeroSection = () => {
               whiteSpace: 'nowrap',
               top: '-8%',
               left: '10%',
-              animationDelay: '.4s',
-              '@media (max-width: 768px)': {
-                display: 'none'
-              }
+              animationDelay: '.4s'
             }}
           >
             🔗 RAG
@@ -443,10 +426,10 @@ const HeroSection = () => {
 
       {/* Scroll hint */}
       <div
-        className="scroll-hint"
+        className="scroll-hint hero-scroll-hint"
         style={{
           position: 'absolute',
-          bottom: '32px',
+          bottom: '40px',
           left: '50%',
           transform: 'translateX(-50%)',
           display: 'flex',
@@ -457,10 +440,7 @@ const HeroSection = () => {
           fontSize: '.65rem',
           letterSpacing: '.15em',
           color: 'var(--muted2)',
-          zIndex: 2,
-          '@media (max-width: 768px)': {
-            display: 'none'
-          }
+          zIndex: 2
         }}
       >
         <span>SCROLL</span>

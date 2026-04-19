@@ -169,13 +169,7 @@ const ProjectsSection = () => {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '24px',
-          '@media (max-width: 1024px)': {
-            gridTemplateColumns: '1fr 1fr'
-          },
-          '@media (max-width: 768px)': {
-            gridTemplateColumns: '1fr'
-          }
+          gap: '24px'
         }}
       >
         {projectsData.map((project, index) => (

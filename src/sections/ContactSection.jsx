@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -12,6 +13,11 @@ const ContactSection = () => {
   const sectionRef = useRef(null)
 
   useEffect(() => {
+    // Initialize EmailJS v4 with public key
+    emailjs.init({
+      publicKey: "T6qIIbwz2Gr38PBxy",
+    });
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isVisible) {
@@ -30,7 +36,7 @@ const ContactSection = () => {
         observer.unobserve(sectionRef.current)
       }
     }
-  }, [isVisible])
+  }, [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -38,6 +44,26 @@ const ContactSection = () => {
       ...prev,
       [name]: value
     }))
+  }
+
+  const testEmailJS = async () => {
+    try {
+      console.log('🧪 Testing EmailJS...')
+      console.log('EmailJS object:', emailjs)
+      
+      // Test if EmailJS is properly initialized
+      const testResult = await emailjs.send('service_2j6o4f5', 'template_i9zgzrt', {
+        from_name: 'Test User',
+        from_email: 'test@example.com',
+        message: 'This is a test message'
+      })
+      
+      console.log('✅ EmailJS test passed:', testResult)
+      return true
+    } catch (error) {
+      console.error('❌ EmailJS test failed:', error)
+      return false
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -49,20 +75,45 @@ const ContactSection = () => {
 
     setIsSubmitting(true)
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // EmailJS configuration
+      const serviceID = 'service_2j6o4f5'
+      const templateID = 'template_i9zgzrt'
+
+      console.log('📧 Attempting to send email...')
+      console.log('Service ID:', serviceID)
+      console.log('Template ID:', templateID)
+      console.log('Form data:', formData)
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message
+      }
+
+      const result = await emailjs.send(serviceID, templateID, templateParams)
+      
+      console.log('✅ Email sent successfully:', result)
       setIsSubmitted(true)
-      setIsSubmitting(false)
       setFormData({ name: '', email: '', message: '' })
-    }, 1200)
+    } catch (error) {
+      console.error('❌ Email send failed:', error)
+      console.error('Error type:', typeof error)
+      console.error('Error string:', JSON.stringify(error, null, 2))
+      
+      // Try to extract meaningful error
+      const errorMessage = error.text || error.message || error.toString() || 'Unknown error'
+      alert(`Failed to send message: ${errorMessage}`)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactDetails = [
     {
       icon: '📧',
       label: 'EMAIL',
-      content: 'alex@example.com',
-      type: 'email'
+      content: 'your-actual-email@gmail.com' // Replace with your real email
     },
     {
       icon: '📍',
@@ -105,7 +156,7 @@ const ContactSection = () => {
           <polyline points="22,6 12,13 2,6"/>
         </svg>
       ),
-      href: 'mailto:alex@example.com'
+      href: 'mailto:your-actual-email@gmail.com'
     },
     {
       name: 'Twitter/X',
@@ -133,11 +184,7 @@ const ContactSection = () => {
           display: 'grid',
           gridTemplateColumns: '1fr 1.2fr',
           gap: '80px',
-          alignItems: 'start',
-          '@media (max-width: 768px)': {
-            gridTemplateColumns: '1fr',
-            gap: '40px'
-          }
+          alignItems: 'start'
         }}
       >
         <div
@@ -262,11 +309,7 @@ const ContactSection = () => {
                     style={{
                       color: 'var(--text)',
                       fontSize: '.9rem',
-                      margin: 0,
-                      '@media (max-width: 480px)': {
-                        fontSize: '.85rem',
-                        wordBreak: 'break-word'
-                      }
+                      margin: 0
                     }}
                   >
                     {detail.content}
@@ -282,10 +325,7 @@ const ContactSection = () => {
             style={{
               display: 'flex',
               gap: '14px',
-              marginTop: '36px',
-              '@media (max-width: 480px)': {
-                flexWrap: 'wrap'
-              }
+              marginTop: '36px'
             }}
           >
             {socialLinks.map((social, index) => (
@@ -495,40 +535,48 @@ const ContactSection = () => {
             </div>
 
             {!isSubmitted ? (
-              <button
-                type="submit"
-                className="submit-btn"
-                disabled={isSubmitting}
-                style={{
-                  background: 'var(--green)',
-                  color: 'var(--black)',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '.82rem',
-                  fontWeight: 700,
-                  letterSpacing: '.1em',
-                  padding: '16px',
-                  border: 'none',
-                  borderRadius: 'var(--radius)',
-                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  transition: 'box-shadow .25s, transform .2s',
-                  marginTop: '4px',
-                  opacity: isSubmitting ? '.7' : '1'
-                }}
-                onMouseEnter={(e) => {
-                  if (!isSubmitting) {
-                    e.target.style.boxShadow = 'var(--glow)'
-                    e.target.style.transform = 'translateY(-2px)'
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isSubmitting) {
-                    e.target.style.boxShadow = 'none'
-                    e.target.style.transform = 'translateY(0)'
-                  }
-                }}
-              >
-                {isSubmitting ? 'Sending…' : 'Send Message →'}
-              </button>
+              <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
+                <button
+                  type="submit"
+                  className="submit-btn"
+                  disabled={isSubmitting}
+                  style={{
+                    background: isSubmitting ? 'var(--border)' : 'var(--green)',
+                    color: isSubmitting ? 'var(--muted)' : 'var(--black)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '.85rem',
+                    fontWeight: 700,
+                    letterSpacing: '.1em',
+                    padding: '16px 32px',
+                    borderRadius: '10px',
+                    border: 'none',
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                    transition: 'all .3s ease',
+                    width: '100%'
+                  }}
+                >
+                  {isSubmitting ? 'SENDING...' : isSubmitted ? '✓ MESSAGE SENT' : 'SEND MESSAGE'}
+                </button>
+                <button
+                  type="button"
+                  onClick={testEmailJS}
+                  style={{
+                    background: 'var(--bg2)',
+                    color: 'var(--green)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '.75rem',
+                    fontWeight: 700,
+                    letterSpacing: '.1em',
+                    padding: '16px 20px',
+                    borderRadius: '10px',
+                    border: '1px solid var(--green)',
+                    cursor: 'pointer',
+                    transition: 'all .3s ease'
+                  }}
+                >
+                  🧪 TEST
+                </button>
+              </div>
             ) : (
               <div
                 className="form-success"
