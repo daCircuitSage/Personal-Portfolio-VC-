@@ -89,10 +89,7 @@ const Navbar = () => {
           style={{
             display: 'flex',
             gap: '36px',
-            listStyle: 'none',
-            '@media (max-width: 768px)': {
-              display: 'none'
-            }
+            listStyle: 'none'
           }}
         >
           <li><a href="#about" className="nav-link" onClick={(e) => handleSmoothScroll(e, '#about')} style={{
@@ -155,10 +152,7 @@ const Navbar = () => {
             borderRadius: '99px',
             textDecoration: 'none',
             letterSpacing: '.1em',
-            transition: 'background .2s, box-shadow .2s',
-            '@media (max-width: 768px)': {
-              display: 'none'
-            }
+            transition: 'background .2s, box-shadow .2s'
           }}
         >
           Hire Me
@@ -174,10 +168,7 @@ const Navbar = () => {
             gap: '5px',
             cursor: 'pointer',
             background: 'none',
-            border: 'none',
-            '@media (max-width: 768px)': {
-              display: 'flex'
-            }
+            border: 'none'
           }}
         >
           <span style={{
@@ -220,10 +211,7 @@ const Navbar = () => {
           borderBottom: '1px solid var(--border)',
           flexDirection: 'column',
           gap: 0,
-          padding: '12px 0',
-          '@media (max-width: 768px)': {
-            display: mobileMenuOpen ? 'flex' : 'none'
-          }
+          padding: '12px 0'
         }}
       >
         <a href="#about" className="mm-link" onClick={(e) => handleSmoothScroll(e, '#about')} style={{
@@ -304,12 +292,35 @@ const Navbar = () => {
         .mobile-menu a:hover {
           color: var(--green);
         }
+        .mobile-menu.open {
+          display: flex;
+        }
         @media (max-width: 768px) {
           .nav-links, .nav-cta {
-            display: none;
+            display: none !important;
           }
           .hamburger {
-            display: flex;
+            display: flex !important;
+            width: 44px !important;
+            height: 44px !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+          .mobile-menu {
+            display: flex !important;
+          }
+          .mobile-menu:not(.open) {
+            display: none !important;
+          }
+          .nav-logo {
+            font-size: .85rem !important;
+          }
+          .mm-link {
+            padding: 16px 5% !important;
+            font-size: .9rem !important;
+            min-height: 48px !important;
+            display: flex !important;
+            align-items: center !important;
           }
         }
       `}</style>

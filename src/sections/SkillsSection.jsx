@@ -152,10 +152,7 @@ const SkillsSection = () => {
               transition: 'border-color .3s, box-shadow .3s, transform .3s',
               opacity: visibleCategories.has(category.name) ? 1 : 0,
               transform: visibleCategories.has(category.name) ? 'translateY(0)' : 'translateY(24px)',
-              transitionDelay: `${index * 100}ms`,
-              '@media (max-width: 480px)': {
-                padding: '24px 20px'
-              }
+              transitionDelay: `${index * 100}ms`
             }}
             onMouseEnter={(e) => {
               e.target.style.borderColor = 'var(--green)'
@@ -318,6 +315,61 @@ const SkillsSection = () => {
           </div>
         ))}
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .skills-cats {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 16px !important;
+          }
+          .skill-cat {
+            padding: 24px 20px !important;
+          }
+          .skill-cat-icon {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1.2rem !important;
+          }
+          .skill-cat-title {
+            font-size: 1rem !important;
+            margin-bottom: 8px !important;
+          }
+          .skill-cat-desc {
+            font-size: .85rem !important;
+            margin-bottom: 16px !important;
+          }
+          .skill-tags {
+            gap: 6px !important;
+          }
+          .skill-tag {
+            font-size: .65rem !important;
+            padding: 3px 8px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .skills-cats {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+          .skill-cat {
+            padding: 20px 16px !important;
+          }
+          .skill-cat-icon {
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 1rem !important;
+          }
+          .skill-cat-title {
+            font-size: .95rem !important;
+          }
+          .skill-cat-desc {
+            font-size: .8rem !important;
+          }
+          .skill-tag {
+            font-size: .6rem !important;
+            padding: 2px 6px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

@@ -21,6 +21,7 @@ out/
 .env*
 !.env.example
 .env.*.local
+.env.example
 
 # IDE and editor files
 .vscode/

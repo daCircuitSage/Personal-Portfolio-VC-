@@ -6,39 +6,25 @@ const ExperienceSection = () => {
 
   const timelineData = [
     {
-      date: '2021',
-      role: 'Self-Taught Developer',
-      company: 'Independent Learning',
-      description: 'Dived deep into Python fundamentals, OOP, data structures, and algorithms. Built 10+ console and web projects. Fell in love with the craft.',
-      tags: ['Python', 'OOP', 'Algorithms']
+      date: '2025',
+      role: 'Software Engineering Intern',
+      company: 'BDCaLLing',
+      description: 'Contributed to client-based projects, assisted in backend development, API integration, and team collaboration.',
+      tags: ['Python', 'OOP', 'Django', 'REST APIs']
     },
     {
-      date: '2022',
-      role: 'Backend Specialization',
+      date: 'Oct 2025',
+      role: 'Team Project (Client Work)',
       company: 'Django + REST APIs',
-      description: 'Mastered Django, Django REST Framework, PostgreSQL and async workflows with Celery. Shipped my first production API serving real users.',
+      description: 'Worked with a team to build a portfolio website for BroEditz agency based on client requirements, focusing on development and collaboration.',
       tags: ['Django', 'DRF', 'PostgreSQL', 'Celery']
     },
     {
-      date: '2023',
-      role: 'AI & LLM Engineering',
+      date: '2026',
+      role: 'Self-Learning – AI Automation & Backend Development',
       company: 'Freelance / Open Source',
-      description: 'Pivoted into the AI space — built RAG systems, LangChain agents, and automation tools with OpenAI APIs. Contributed to 3 open-source AI projects.',
+      description: 'Continuously learning AI automation and backend technologies with a focus on Python-based tools and workflow automation. Built foundational understanding of APIs, automation logic, and AI-assisted development practices through self-study and practical experimentation in small projects.',
       tags: ['LangChain', 'RAG', 'OpenAI', 'Agents']
-    },
-    {
-      date: '2024',
-      role: 'AI Automation Engineer',
-      company: 'Freelance & Client Projects',
-      description: 'Delivering end-to-end AI automation solutions for startups — from automated pipelines to intelligent chatbots. Building systems that save clients 100+ hours/month.',
-      tags: ['n8n', 'LangChain', 'FastAPI', 'Docker']
-    },
-    {
-      date: '2025 →',
-      role: 'Full-Stack AI Builder',
-      company: 'Open to Opportunities',
-      description: 'Expanding into multi-modal AI, complex agent systems, and scalable SaaS infrastructure. Looking for the right team to build something exceptional.',
-      tags: ['Agents', 'Multi-modal AI', 'SaaS', 'System Design']
     }
   ]
 
@@ -280,6 +266,62 @@ const ExperienceSection = () => {
           </div>
         ))}
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .timeline {
+            gap: 24px !important;
+          }
+          .tl-item {
+            gap: 16px !important;
+            flex-direction: column !important;
+          }
+          .tl-date {
+            min-width: auto !important;
+            font-size: .75rem !important;
+            margin-bottom: 8px !important;
+          }
+          .tl-content {
+            padding: 16px !important;
+          }
+          .tl-title {
+            font-size: 1rem !important;
+            margin-bottom: 6px !important;
+          }
+          .tl-desc {
+            font-size: .85rem !important;
+            margin-bottom: 12px !important;
+          }
+          .tl-tags {
+            flex-wrap: wrap !important;
+            gap: 6px !important;
+          }
+          .tl-tag {
+            font-size: .6rem !important;
+            padding: 3px 8px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .timeline {
+            gap: 20px !important;
+          }
+          .tl-date {
+            font-size: .7rem !important;
+          }
+          .tl-content {
+            padding: 14px !important;
+          }
+          .tl-title {
+            font-size: .95rem !important;
+          }
+          .tl-desc {
+            font-size: .8rem !important;
+          }
+          .tl-tag {
+            font-size: .55rem !important;
+            padding: 2px 6px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

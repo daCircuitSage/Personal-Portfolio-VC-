@@ -178,7 +178,24 @@ section { padding: 100px 5%; position: relative; }
   transform: translateY(-2px);
 }
 
-/* ─── RESPONSIVE ─────────────────────────────────────── */
+/* ─── FORM ELEMENTS ─────────────────────────────────── */
+.form-group input,
+.form-group textarea {
+  cursor: text !important;
+  pointer-events: auto !important;
+  z-index: 10;
+}
+
+.submit-btn {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 10;
+}
+
+.contact-form {
+  pointer-events: auto !important;
+  z-index: 5;
+}
 @media (max-width: 1024px) {
   .skills-cats { grid-template-columns: 1fr 1fr; }
   .projects-grid { grid-template-columns: 1fr 1fr; }
@@ -193,28 +210,79 @@ section { padding: 100px 5%; position: relative; }
   .form-group input, .form-group textarea { cursor: text; }
 
   /* Nav */
-  .nav-links, .nav-cta { display: none; }
-  .hamburger { display: flex; }
+  .nav-links, .nav-cta { display: none !important; }
+  .hamburger { display: flex !important; }
+  .mobile-menu.open { display: flex !important; }
 
   /* Section padding */
-  section { padding: 72px 5%; }
+  section { padding: 60px 4% !important; }
 
-  /* Contact section */
-  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-  .socials { flex-wrap: wrap; }
+  /* Typography */
+  .section-title { font-size: 2.2rem !important; }
+  .section-sub { font-size: .9rem !important; }
+
+  /* Grid layouts */
+  .skills-cats { grid-template-columns: 1fr 1fr !important; }
+  .projects-grid { grid-template-columns: 1fr 1fr !important; }
+  .contact-inner { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .socials { flex-wrap: wrap !important; }
 }
 
 @media (max-width: 480px) {
-  section { padding: 60px 4%; }
-  .contact-detail-text p { font-size: .85rem; word-break: break-word; }
+  section { padding: 48px 3% !important; }
+  .contact-detail-text p { font-size: .85rem !important; word-break: break-word !important; }
+  
+  /* Single column grids */
+  .skills-cats { grid-template-columns: 1fr !important; }
+  .projects-grid { grid-template-columns: 1fr !important; }
+  
+  /* Typography */
+  .section-title { font-size: 1.8rem !important; }
+  .section-sub { font-size: .85rem !important; }
+  .hero-name { font-size: 2.1rem !important; }
+  .stat-number { font-size: 1.7rem !important; }
 }
 
 @media (max-width: 360px) {
-  .hero-name { font-size: 2.1rem; }
-  .section-title { font-size: 1.9rem; }
-  .stat-number { font-size: 1.7rem; }
-  .hero-btns { gap: 10px; }
-  .btn-primary, .btn-secondary { padding: 12px 20px; font-size: .75rem; }
+  section { padding: 40px 3% !important; }
+  .hero-name { font-size: 1.8rem !important; }
+  .section-title { font-size: 1.6rem !important; }
+  .stat-number { font-size: 1.5rem !important; }
+  .hero-btns { gap: 8px !important; }
+  .btn-primary, .btn-secondary { padding: 12px 18px !important; font-size: .7rem !important; }
+  
+  /* Extra small adjustments */
+  .section-label { font-size: .65rem !important; }
+  .section-sub { font-size: .8rem !important; }
+}
+
+/* Touch optimizations */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  button, a, input, textarea {
+    min-height: 44px !important;
+  }
+  
+  /* Better spacing for touch */
+  .btn-primary, .btn-secondary, .btn-ghost {
+    min-height: 44px !important;
+    padding: 12px 20px !important;
+  }
+  
+  /* Remove hover effects on touch */
+  *:hover {
+    transition: none !important;
+  }
+  
+  /* Better scroll behavior */
+  html {
+    scroll-behavior: smooth !important;
+  }
+  
+  /* Prevent zoom on inputs */
+  input[type="text"], input[type="email"], textarea {
+    font-size: 16px !important;
+  }
 }
 
 /* Hero Section Responsive */

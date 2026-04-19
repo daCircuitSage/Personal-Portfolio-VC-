@@ -101,11 +101,7 @@ const AboutSection = () => {
         alignItems: 'center',
         background: 'var(--bg2)',
         borderTop: '1px solid var(--border)',
-        borderBottom: '1px solid var(--border)',
-        '@media (max-width: 768px)': {
-          gridTemplateColumns: '1fr',
-          gap: '40px'
-        }
+        borderBottom: '1px solid var(--border)'
       }}
     >
       <div className="about-text">
@@ -182,11 +178,7 @@ const AboutSection = () => {
           gap: '20px',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-          transition: 'opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1)',
-          '@media (max-width: 480px)': {
-            gridTemplateColumns: '1fr 1fr',
-            gap: '12px'
-          }
+          transition: 'opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1)'
         }}
       >
         {stats.map((stat, index) => (
@@ -201,10 +193,7 @@ const AboutSection = () => {
               transition: 'border-color .25s, box-shadow .25s, transform .25s',
               opacity: 0,
               transform: 'translateY(20px)',
-              animation: isVisible ? `fadeInUp 0.6s ${stat.delay}ms forwards` : 'none',
-              '@media (max-width: 480px)': {
-                padding: '20px 16px'
-              }
+              animation: isVisible ? `fadeInUp 0.6s ${stat.delay}ms forwards` : 'none'
             }}
             onMouseEnter={(e) => {
               e.target.style.borderColor = 'var(--green)'
@@ -225,10 +214,7 @@ const AboutSection = () => {
                 fontWeight: 800,
                 color: 'var(--green)',
                 lineHeight: 1,
-                marginBottom: '6px',
-                '@media (max-width: 480px)': {
-                  fontSize: '2rem'
-                }
+                marginBottom: '6px'
               }}
             >
               {counters[stat.key]}{stat.suffix}
@@ -239,10 +225,7 @@ const AboutSection = () => {
                 fontSize: '.82rem',
                 color: 'var(--muted)',
                 fontFamily: 'var(--font-mono)',
-                letterSpacing: '.06em',
-                '@media (max-width: 480px)': {
-                  fontSize: '.72rem'
-                }
+                letterSpacing: '.06em'
               }}
             >
               {stat.label}
@@ -256,6 +239,69 @@ const AboutSection = () => {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+        @media (max-width: 768px) {
+          section {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+            padding: 60px 4% !important;
+          }
+          .about-text {
+            order: 2 !important;
+          }
+          .stats-grid {
+            order: 1 !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+          .stat-card {
+            padding: 20px 16px !important;
+          }
+          .stat-number {
+            font-size: 2rem !important;
+          }
+          .stat-label {
+            font-size: .75rem !important;
+          }
+          .section-title {
+            font-size: 2.2rem !important;
+          }
+        }
+        @media (max-width: 480px) {
+          section {
+            gap: 24px !important;
+            padding: 48px 3% !important;
+          }
+          .stats-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 12px !important;
+          }
+          .stat-card {
+            padding: 16px 12px !important;
+          }
+          .stat-number {
+            font-size: 1.8rem !important;
+          }
+          .stat-label {
+            font-size: .7rem !important;
+          }
+          .section-title {
+            font-size: 1.8rem !important;
+          }
+        }
+        @media (max-width: 360px) {
+          .stats-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .stat-card {
+            padding: 14px 10px !important;
+          }
+          .stat-number {
+            font-size: 1.6rem !important;
+          }
+          .section-title {
+            font-size: 1.6rem !important;
           }
         }
       `}</style>

@@ -598,6 +598,58 @@ const ContactSection = () => {
           </form>
         </div>
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .contact-inner {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .contact-form {
+            gap: 16px !important;
+          }
+          .form-group {
+            margin-bottom: 16px !important;
+          }
+          .form-group input,
+          .form-group textarea {
+            padding: 12px 16px !important;
+            font-size: .9rem !important;
+            min-height: 44px !important;
+          }
+          .submit-btn {
+            padding: 12px 24px !important;
+            font-size: .8rem !important;
+            min-height: 44px !important;
+          }
+          .socials {
+            flex-wrap: wrap !important;
+            gap: 8px !important;
+          }
+          .social-btn {
+            padding: 8px 12px !important;
+            font-size: .75rem !important;
+            min-height: 36px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .contact-inner {
+            gap: 24px !important;
+          }
+          .form-group input,
+          .form-group textarea {
+            padding: 10px 14px !important;
+            font-size: .85rem !important;
+          }
+          .submit-btn {
+            padding: 10px 20px !important;
+            font-size: .75rem !important;
+          }
+          .social-btn {
+            padding: 6px 10px !important;
+            font-size: .7rem !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

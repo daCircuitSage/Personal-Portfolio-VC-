@@ -149,11 +149,7 @@ const HeroSection = () => {
             marginBottom: '40px',
             opacity: 0,
             transform: 'translateY(20px)',
-            transition: 'opacity .8s .6s both, transform .8s .6s both',
-            '@media (max-width: 768px)': {
-              margin: '0 auto 32px',
-              maxWidth: '100%'
-            }
+            transition: 'opacity .8s .6s both, transform .8s .6s both'
           }}
         >
           I build <em style={{ color: 'var(--text)', fontStyle: 'normal', fontWeight: 500 }}>intelligent systems</em> that scale — from robust Django APIs
@@ -168,10 +164,7 @@ const HeroSection = () => {
             flexWrap: 'wrap',
             opacity: 0,
             transform: 'translateY(20px)',
-            transition: 'opacity .8s .75s both, transform .8s .75s both',
-            '@media (max-width: 768px)': {
-              justifyContent: 'center'
-            }
+            transition: 'opacity .8s .75s both, transform .8s .75s both'
           }}
         >
           <a
@@ -364,13 +357,7 @@ const HeroSection = () => {
               whiteSpace: 'nowrap',
               bottom: '18%',
               left: '-20%',
-              animationDelay: '.8s',
-              '@media (max-width: 768px)': {
-                fontSize: '.62rem',
-                padding: '6px 10px',
-                bottom: '5%',
-                left: '-5%'
-              }
+              animationDelay: '.8s'
             }}
           >
             ⚡ Django
@@ -473,6 +460,96 @@ const HeroSection = () => {
         @keyframes scrollline {
           0%,100% { opacity: .3 }
           50% { opacity: 1 }
+        }
+        
+        @media (max-width: 768px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            text-align: center !important;
+            gap: 28px !important;
+            padding-top: 100px !important;
+          }
+          .hero-photo {
+            order: -1 !important;
+          }
+          .hero-photo-frame {
+            width: clamp(160px, 45vw, 220px) !important;
+            height: clamp(160px, 45vw, 220px) !important;
+          }
+          .hero-photo-emoji {
+            font-size: 4rem !important;
+          }
+          .hero-badge {
+            margin-bottom: 20px !important;
+            font-size: .65rem !important;
+            padding: 5px 14px !important;
+          }
+          .hero-tagline {
+            margin: 0 auto 24px !important;
+            max-width: 95% !important;
+            font-size: .9rem !important;
+            line-height: 1.6 !important;
+          }
+          .hero-btns {
+            justify-content: center !important;
+            gap: 12px !important;
+          }
+          .tech-badge-3, .tech-badge-4 {
+            display: none !important;
+          }
+          .tech-badge-1 {
+            top: 5% !important;
+            right: -10% !important;
+            font-size: .6rem !important;
+            padding: 6px 10px !important;
+          }
+          .tech-badge-2 {
+            font-size: .6rem !important;
+            padding: 6px 10px !important;
+            bottom: 8% !important;
+            left: -8% !important;
+          }
+          .hero-scroll-hint {
+            display: none !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-grid {
+            gap: 24px !important;
+            padding-top: 80px !important;
+          }
+          .hero-photo-frame {
+            width: clamp(140px, 40vw, 180px) !important;
+            height: clamp(140px, 40vw, 180px) !important;
+          }
+          .hero-photo-emoji {
+            font-size: 3.5rem !important;
+          }
+          .hero-badge {
+            font-size: .6rem !important;
+            padding: 4px 12px !important;
+          }
+          .hero-name {
+            font-size: 2.5rem !important;
+          }
+          .hero-tagline {
+            font-size: .85rem !important;
+            margin: 0 auto 20px !important;
+          }
+          .hero-btns {
+            gap: 10px !important;
+          }
+          .btn-primary, .btn-secondary {
+            padding: 12px 20px !important;
+            font-size: .75rem !important;
+            min-height: 44px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+          }
+          .tech-badge-1, .tech-badge-2 {
+            font-size: .55rem !important;
+            padding: 4px 8px !important;
+          }
         }
       `}</style>
     </section>

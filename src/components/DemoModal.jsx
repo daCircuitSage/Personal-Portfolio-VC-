@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 
 const DemoModal = () => {
+  const [isMounted, setIsMounted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isBlocked, setIsBlocked] = useState(false)
@@ -60,6 +61,22 @@ const DemoModal = () => {
     setStatusMessage('Preview blocked by remote server')
   }
 
+  const blockedEmbedDomains = [
+    'google.com',
+    'youtube.com',
+    'wikipedia.org',
+    'stackoverflow.com',
+    'twitter.com',
+    'facebook.com',
+    'linkedin.com',
+    'instagram.com',
+    'github.com'
+  ]
+
+  const isEmbedBlockedDomain = (url) => {
+    return blockedEmbedDomains.some((domain) => url.includes(domain))
+  }
+
   const setupLoadDetection = (url) => {
     if (loadTimerRef.current) clearTimeout(loadTimerRef.current)
     if (blockedTimerRef.current) clearTimeout(blockedTimerRef.current)
@@ -78,7 +95,8 @@ const DemoModal = () => {
             blocked = true
           }
         } catch (e) {
-          // Cross-origin SecurityError = iframe loaded but we can't read it
+          // Cross-origin SecurityError means the page loaded cross-origin.
+          // We still want to show the iframe unless we explicitly know the domain is blocked.
           blocked = false
         }
         
@@ -92,48 +110,63 @@ const DemoModal = () => {
       }, 800)
     }
 
-    // Hard fallback: if nothing happens in 12s, assume blocked
+    iframe.onerror = () => {
+      // This handles X-Frame-Options: DENY and other blocking errors
+      showBlocked()
+      if (blockedTimerRef.current) clearTimeout(blockedTimerRef.current)
+    }
+
+    // Hard fallback: if nothing happens in 8s, assume blocked
     blockedTimerRef.current = setTimeout(() => {
       if (isLoading) showBlocked()
-    }, 12000)
+    }, 8000)
   }
 
   const openModal = (url, title, description) => {
     setCurrentUrl(url)
     setCurrentTitle(title)
     
+    const isBlockedDomain = isEmbedBlockedDomain(url)
+
     // Reset states
     setIsBlocked(false)
-    setIsLoading(true)
-    
-    // Show overlay
-    setIsOpen(true)
+    setIsLoading(!isBlockedDomain)
+    setIsMounted(true)
     document.body.style.overflow = 'hidden'
 
-    // Small delay so modal animation starts before heavy iframe load
     setTimeout(() => {
+      setIsOpen(true)
+      setStatusMessage('Connecting to ' + url.replace(/^https?:\/\//, '').split('/')[0] + '...')
+
+      if (isBlockedDomain) {
+        setIsBlocked(true)
+        setIsLoading(false)
+        return
+      }
+
       setupLoadDetection(url)
       if (iframeRef.current) {
         iframeRef.current.src = url
       }
-      setStatusMessage('Connecting to ' + url.replace(/^https?:\/\//, '').split('/')[0] + '...')
-    }, 220)
+    }, 20)
   }
 
   const closeModal = () => {
     setIsOpen(false)
     document.body.style.overflow = ''
 
-    // Clear iframe after transition to free resources
+    // Clear iframe after transition to free resources and unmount
     setTimeout(() => {
       if (iframeRef.current) {
         iframeRef.current.src = 'about:blank'
         iframeRef.current.onload = null
+        iframeRef.current.onerror = null
       }
       if (loadTimerRef.current) clearTimeout(loadTimerRef.current)
       if (blockedTimerRef.current) clearTimeout(blockedTimerRef.current)
-      showLoader() // reset for next open
-    }, 380)
+      showLoader()
+      setIsMounted(false)
+    }, 420)
   }
 
   const reloadIframe = () => {
@@ -154,7 +187,7 @@ const DemoModal = () => {
     }
   }
 
-  if (!isOpen) return null
+  if (!isMounted) return null
 
   return (
     <div
@@ -704,8 +737,7 @@ const DemoModal = () => {
             id="demo-iframe"
             src="about:blank"
             title="Project Preview"
-            allow="fullscreen"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            allow="fullscreen; autoplay; clipboard-read; clipboard-write; encrypted-media; geolocation; microphone; camera"
             style={{
               width: '100%',
               height: '100%',

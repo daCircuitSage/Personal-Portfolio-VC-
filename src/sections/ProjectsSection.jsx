@@ -11,8 +11,9 @@ const ProjectsSection = () => {
       title: 'AI Document Assistant',
       description: 'RAG-powered chatbot that ingests PDFs and answers complex queries with cited sources — built on LangChain + FAISS with a DRF backend.',
       stack: ['Python', 'LangChain', 'RAG', 'OpenAI'],
-      demoUrl: 'https://example.com',
-      githubUrl: '#',
+      demoUrl: 'https://anythingchatbot.onrender.com',
+      githubUrl: 'https://github.com/daCircuitSage/RAG-Document-Assistant',
+      type: 'internal-preview',
       bgGradient: 'radial-gradient(circle at 40% 60%,#00ff8830,transparent 70%)'
     },
     {
@@ -20,9 +21,10 @@ const ProjectsSection = () => {
       emoji: '⚡',
       title: 'E-Commerce API Platform',
       description: 'Scalable REST API serving 50k+ products with async order processing, JWT auth, payment webhooks, and sub-100ms response times.',
-      stack: ['Django', 'DRF', 'Celery', 'Redis'],
-      demoUrl: 'https://example.com',
-      githubUrl: '#',
+      stack: ['Django', 'DRF', 'Celery'],
+      demoUrl: 'https://google.com',
+      githubUrl: 'https://github.com/daCircuitSage/PACIFICMART',
+      type: 'internal-preview',
       bgGradient: 'radial-gradient(circle at 60% 40%,#00ffcc25,transparent 70%)'
     },
     {
@@ -33,6 +35,7 @@ const ProjectsSection = () => {
       stack: ['n8n', 'Python', 'OpenAI', 'Webhooks'],
       demoUrl: 'https://example.com',
       githubUrl: '#',
+      type: 'internal-preview',
       bgGradient: 'radial-gradient(circle at 50% 50%,#00ff8820,transparent 70%)'
     },
     {
@@ -41,8 +44,9 @@ const ProjectsSection = () => {
       title: 'Analytics Microservice',
       description: 'High-throughput event ingestion service processing 1M+ events/day with real-time aggregation, alerting, and a query API.',
       stack: ['FastAPI', 'PostgreSQL', 'Docker'],
-      demoUrl: 'https://example.com',
+      demoUrl: 'https://www.youtube.com',
       githubUrl: '#',
+      type: 'internal-preview',
       bgGradient: 'radial-gradient(circle at 30% 70%,#00ff8828,transparent 70%)'
     },
     {
@@ -51,8 +55,9 @@ const ProjectsSection = () => {
       title: 'Autonomous AI Agent',
       description: 'Multi-step reasoning agent that plans, uses tools (search, code interpreter, APIs), and executes complex tasks with minimal human input.',
       stack: ['LangChain', 'Agents', 'Tools'],
-      demoUrl: 'https://example.com',
+      demoUrl: 'https://www.wikipedia.org',
       githubUrl: '#',
+      type: 'internal-preview',
       bgGradient: 'radial-gradient(circle at 70% 30%,#00ffcc20,transparent 70%)'
     },
     {
@@ -61,8 +66,9 @@ const ProjectsSection = () => {
       title: 'Auth & Permissions Engine',
       description: 'Enterprise-grade auth system with role-based access, OAuth2 social login, MFA, and audit logging — drop-in for any Django project.',
       stack: ['Django', 'JWT', 'OAuth2', 'DRF'],
-      demoUrl: 'https://example.com',
+      demoUrl: 'https://stackoverflow.com',
       githubUrl: '#',
+      type: 'internal-preview',
       bgGradient: 'radial-gradient(circle at 50% 80%,#00ff8822,transparent 70%)'
     }
   ]
@@ -91,10 +97,11 @@ const ProjectsSection = () => {
   }, [visibleProjects])
 
   const handleDemoClick = (project) => {
-    // This will trigger the global demo modal
+    const url = project.demoUrl.startsWith('http') ? project.demoUrl : `https://${project.demoUrl}`
+
     const event = new CustomEvent('openDemoModal', {
       detail: {
-        url: project.demoUrl,
+        url,
         title: project.title,
         description: project.description
       }
@@ -371,6 +378,74 @@ const ProjectsSection = () => {
           </div>
         ))}
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .projects-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 16px !important;
+          }
+          .project-card {
+            border-radius: 12px !important;
+          }
+          .project-thumb {
+            height: 140px !important;
+          }
+          .project-content {
+            padding: 16px !important;
+          }
+          .project-title {
+            font-size: .95rem !important;
+            margin-bottom: 8px !important;
+          }
+          .project-desc {
+            font-size: .8rem !important;
+            margin-bottom: 12px !important;
+          }
+          .project-tags {
+            gap: 4px !important;
+            margin-bottom: 12px !important;
+          }
+          .project-tag {
+            font-size: .6rem !important;
+            padding: 2px 6px !important;
+          }
+          .project-links {
+            gap: 8px !important;
+          }
+          .project-link {
+            padding: 6px 12px !important;
+            font-size: .7rem !important;
+            min-height: 32px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .projects-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+          .project-thumb {
+            height: 160px !important;
+          }
+          .project-content {
+            padding: 16px !important;
+          }
+          .project-title {
+            font-size: 1rem !important;
+          }
+          .project-desc {
+            font-size: .85rem !important;
+          }
+          .project-tag {
+            font-size: .65rem !important;
+            padding: 3px 8px !important;
+          }
+          .project-link {
+            padding: 8px 14px !important;
+            font-size: .75rem !important;
+            min-height: 36px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

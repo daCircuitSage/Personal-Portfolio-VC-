@@ -31,6 +31,10 @@ const CustomCursor = () => {
     }
 
     const handleMouseEnter = () => {
+      // Don't show cursor effects on form elements
+      if (event.target.closest('input, textarea, button')) {
+        return;
+      }
       ring.style.width = '52px'
       ring.style.height = '52px'
       ring.style.borderColor = 'var(--green)'
@@ -40,6 +44,10 @@ const CustomCursor = () => {
     }
 
     const handleMouseLeave = () => {
+      // Don't hide cursor effects on form elements
+      if (event.target.closest('input, textarea, button')) {
+        return;
+      }
       ring.style.width = '36px'
       ring.style.height = '36px'
       ring.style.borderColor = 'var(--green)'
@@ -49,12 +57,25 @@ const CustomCursor = () => {
     }
 
     // Add hover effect to interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .skill-cat, .project-card, .stat-card, .social-btn')
+    const interactiveElements = document.querySelectorAll('a, button, input, textarea, .skill-cat, .project-card, .stat-card, .social-btn')
     interactiveElements.forEach(el => {
       el.addEventListener('mouseenter', handleMouseEnter)
       el.addEventListener('mouseleave', handleMouseLeave)
     })
-
+    // Add special handling for form elements to prevent cursor interference
+    const formElements = document.querySelectorAll('input, textarea')
+    formElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        // Hide custom cursor when over form elements
+        dot.style.opacity = '0'
+        ring.style.opacity = '0'
+      })
+      el.addEventListener('mouseleave', () => {
+        // Show custom cursor when leaving form elements
+        dot.style.opacity = '1'
+        ring.style.opacity = '0.5'
+      })
+    })
     document.addEventListener('mousemove', handleMouseMove)
     animateCursor()
 
