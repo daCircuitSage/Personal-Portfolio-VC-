@@ -119,6 +119,15 @@ const Navbar = () => {
             transition: 'color .2s',
             position: 'relative'
           }}>Projects</a></li>
+          <li><a href="#timepass" className="nav-link" onClick={(e) => handleSmoothScroll(e, '#timepass')} style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '.78rem',
+            color: activeSection === 'timepass' ? 'var(--green)' : 'var(--muted)',
+            textDecoration: 'none',
+            letterSpacing: '.08em',
+            transition: 'color .2s',
+            position: 'relative'
+          }}>Timepass</a></li>
           <li><a href="#experience" className="nav-link" onClick={(e) => handleSmoothScroll(e, '#experience')} style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '.78rem',
@@ -244,6 +253,16 @@ const Navbar = () => {
           borderBottom: '1px solid var(--border)',
           transition: 'color .2s'
         }}>Projects</a>
+        <a href="#timepass" className="mm-link" onClick={(e) => handleSmoothScroll(e, '#timepass')} style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: '.85rem',
+          color: 'var(--muted)',
+          textDecoration: 'none',
+          padding: '14px 5%',
+          letterSpacing: '.08em',
+          borderBottom: '1px solid var(--border)',
+          transition: 'color .2s'
+        }}>Timepass</a>
         <a href="#experience" className="mm-link" onClick={(e) => handleSmoothScroll(e, '#experience')} style={{
           fontFamily: 'var(--font-mono)',
           fontSize: '.85rem',
