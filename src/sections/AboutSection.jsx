@@ -50,9 +50,9 @@ const AboutSection = () => {
     }
 
     const timers = [
-      animateCounter(30, 'projects'),
+      animateCounter(20, 'projects'),
       animateCounter(15, 'skills'),
-      animateCounter(3, 'years'),
+      animateCounter(1, 'years'),
       animateCounter(99, 'commitment')
     ]
 
@@ -62,7 +62,7 @@ const AboutSection = () => {
   const stats = [
     { 
       key: 'projects', 
-      target: 30, 
+      target: 20, 
       label: 'Projects Shipped',
       suffix: '+',
       delay: 0
@@ -76,7 +76,7 @@ const AboutSection = () => {
     },
     { 
       key: 'years', 
-      target: 3, 
+      target: 1, 
       label: 'Years Experience',
       suffix: '+',
       delay: 200
