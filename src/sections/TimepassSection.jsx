@@ -20,8 +20,7 @@ const CircuitPattern = ({ isActive }) => {
           d="M 50 50 L 150 50 L 150 100 L 250 100"
           animate={{
             strokeDashoffset: isActive ? [100, 0] : 100,
-            stroke: isActive ? "#22c55e" : "#333",
-            filter: isActive ? "url(#glow)" : "none"
+            stroke: isActive ? "#22c55e" : "#333"
           }}
           transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
           className="energy-line"
@@ -30,8 +29,7 @@ const CircuitPattern = ({ isActive }) => {
           d="M 50 250 L 100 250 L 100 150 L 200 150"
           animate={{
             strokeDashoffset: isActive ? [100, 0] : 100,
-            stroke: isActive ? "#22c55e" : "#333",
-            filter: isActive ? "url(#glow)" : "none"
+            stroke: isActive ? "#22c55e" : "#333"
           }}
           transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: 0.5 }}
           className="energy-line"
@@ -114,12 +112,12 @@ const TimepassSection = () => {
           load: Math.floor(Math.random() * 15) + 42,
           uptime: Math.min(99.999, prev.uptime + 0.0001)
         }))
-      }, 100)
+      }, isMobile ? 200 : 100) // Slower updates on mobile
     } else {
       setMetrics({ requests: 0, load: 0, uptime: 99.982 })
     }
     return () => clearInterval(interval)
-  }, [isPoweringUp])
+  }, [isPoweringUp, isMobile])
 
   const handleInteractionStart = () => {
     setIsPlugged(true)
@@ -213,19 +211,21 @@ const TimepassSection = () => {
 
           {/* Main 3D Stage */}
           <motion.div 
-            style={{ transformStyle: 'preserve-3d' }}
+            style={{ 
+              transformStyle: 'preserve-3d',
+              perspective: isMobile ? '1000px' : '2000px'
+            }}
             animate={{ 
-              rotateX: isPoweringUp ? 32 : 35, 
-              rotateZ: isPoweringUp ? -4 : -5,
-              y: isPoweringUp ? 10 : 0
+              rotateX: isMobile ? (isPoweringUp ? 15 : 18) : (isPoweringUp ? 32 : 35), 
+              rotateZ: isMobile ? (isPoweringUp ? -2 : -3) : (isPoweringUp ? -4 : -5),
+              y: isPoweringUp ? (isMobile ? 5 : 10) : 0
             }}
             style={{
               position: 'relative',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              transition: 'all 0.7s ease-out',
-              perspective: '2000px'
+              transition: 'all 0.7s ease-out'
             }}
           >
             
@@ -247,9 +247,11 @@ const TimepassSection = () => {
                 boxShadow: `
                   -8px 8px 0px #09090b,
                   -20px 20px 40px rgba(0,0,0,0.8),
-                  ${isPoweringUp ? '0 0 80px -20px rgba(0, 255, 65, 0.3)' : 'none'}
+                  ${isPoweringUp ? '0 0 40px -20px rgba(0, 255, 65, 0.3)' : 'none'}
                 `,
-                transformStyle: 'preserve-3d'
+                transformStyle: 'preserve-3d',
+                willChange: 'transform',
+                backfaceVisibility: 'hidden'
               }}
             >
               {/* Internal Glowing Core */}
@@ -405,9 +407,11 @@ const TimepassSection = () => {
                     overflow: 'hidden',
                     boxShadow: `
                       -15px 15px 30px rgba(0,0,0,0.6),
-                      ${isPoweringUp ? '0 0 40px -5px rgba(0, 255, 65, 0.2)' : 'none'}
+                      ${isPoweringUp ? '0 0 20px -5px rgba(0, 255, 65, 0.2)' : 'none'}
                     `,
-                    transformStyle: 'preserve-3d'
+                    transformStyle: 'preserve-3d',
+                    willChange: 'transform',
+                    backfaceVisibility: 'hidden'
                   }}
                 >
                   {/* Energy Rail */}
@@ -415,7 +419,7 @@ const TimepassSection = () => {
                     width: '12px',
                     height: '100%',
                     background: isPoweringUp ? '#00FF41' : '#27272a',
-                    boxShadow: isPoweringUp ? '0 0 20px #00FF41' : 'none',
+                    boxShadow: isPoweringUp ? '0 0 10px #00FF41' : 'none',
                     transition: 'all 0.5s ease',
                     position: 'absolute',
                     left: 0
@@ -433,7 +437,7 @@ const TimepassSection = () => {
                       width: isMobile ? '24px' : '32px',
                       height: isMobile ? '24px' : '32px',
                       color: isPoweringUp ? '#00FF41' : '#52525b',
-                      filter: isPoweringUp ? 'drop-shadow(0 0 10px #00FF41)' : 'none',
+                      filter: isPoweringUp ? 'drop-shadow(0 0 5px #00FF41)' : 'none',
                       transition: 'color 0.5s ease'
                     }} />
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
@@ -481,12 +485,13 @@ const TimepassSection = () => {
                   height: '48px',
                   background: '#a1a1aa',
                   borderRadius: '6px',
-                  zIndex: -10
+                  zIndex: -10,
+                  display: isMobile ? 'none' : 'block' // Hide on mobile
                 }} />
 
                 {/* Spark Emission */}
                 <AnimatePresence>
-                  {isPlugged && !isPoweringUp && (
+                  {isPlugged && !isPoweringUp && !isMobile && (
                     <motion.div 
                       initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: [0, 2, 0], opacity: [0, 1, 0] }}
@@ -514,7 +519,8 @@ const TimepassSection = () => {
                   top: '50%',
                   transform: 'translateY(-50%)',
                   paddingLeft: 0,
-                  pointerEvents: 'none'
+                  pointerEvents: 'none',
+                  display: isMobile ? 'none' : 'block' // Hide on mobile
                 }}>
                   <div style={{
                     width: '800px',
