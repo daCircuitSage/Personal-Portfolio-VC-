@@ -8,6 +8,17 @@ const ProjectsSection = () => {
     {
       id: 1,
       emoji: '🤖',
+      title: 'Sharlok Sage – AI-Powered Research Automation System',
+      description: 'Django REST Framework & LangChain-based Multi-Agent Research Pipeline API',
+      stack: ['Python', 'Django', 'DRF', 'LangChain', 'Multi-Agent System'],
+      demoUrl: 'https://dont-have-live-link.com',
+      githubUrl: 'https://github.com/daCircuitSage/Sharlok-Sage-Research-API',
+      type: 'internal-preview',
+      bgGradient: 'radial-gradient(circle at 40% 60%,#00ff8830,transparent 70%)'
+    },
+    {
+      id: 2,
+      emoji: '🤖',
       title: 'AI Document Assistant',
       description: 'RAG-powered chatbot that ingests PDFs and answers complex queries with cited sources — built on LangChain + FAISS with a DRF backend.',
       stack: ['Python', 'LangChain', 'RAG', 'OpenAI'],
@@ -17,9 +28,9 @@ const ProjectsSection = () => {
       bgGradient: 'radial-gradient(circle at 40% 60%,#00ff8830,transparent 70%)'
     },
     {
-      id: 2,
+      id: 3,
       emoji: '⚡',
-      title: 'E-Commerce API Platform',
+      title: 'E-Commerce API Platform(Live Url)',
       description: 'Scalable REST API serving 50k+ products with async order processing, JWT auth, payment webhooks, and sub-100ms response times.',
       stack: ['Django', 'DRF', 'Celery'],
       demoUrl: 'https://thepacificmart.onrender.com',
@@ -28,7 +39,7 @@ const ProjectsSection = () => {
       bgGradient: 'radial-gradient(circle at 60% 40%,#00ffcc25,transparent 70%)'
     },
     {
-      id: 3,
+      id: 4,
       emoji: '🔄',
       title: 'MovieSummeryAI',
       description: 'An AI-powered movie analysis and summarization platform using LangChain, Mistral AI, and Streamlit.',
@@ -39,7 +50,7 @@ const ProjectsSection = () => {
       bgGradient: 'radial-gradient(circle at 50% 50%,#00ff8820,transparent 70%)'
     },
     {
-      id: 4,
+      id: 5,
       emoji: '📊',
       title: 'E-Commerce Backed API Project',
       description: 'Fully working backed of an E-commerce system.',
@@ -50,7 +61,7 @@ const ProjectsSection = () => {
       bgGradient: 'radial-gradient(circle at 30% 70%,#00ff8828,transparent 70%)'
     },
     {
-      id: 5,
+      id: 6,
       emoji: '🧠',
       title: 'JWT Authentication',
       description: 'This project is basically on Jwt authentication only.',
@@ -61,7 +72,7 @@ const ProjectsSection = () => {
       bgGradient: 'radial-gradient(circle at 70% 30%,#00ffcc20,transparent 70%)'
     },
     {
-      id: 6,
+      id: 7,
       emoji: '🔐',
       title: 'Auth & Permissions Engine (Coming soon — currently in learning phase)',
       description: 'Enterprise-grade auth system with role-based access, OAuth2 social login, MFA, and audit logging — drop-in for any Django project.',
